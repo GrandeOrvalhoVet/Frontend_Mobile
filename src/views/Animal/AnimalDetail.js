@@ -66,8 +66,10 @@ const AnimalDetail = ({ route }) => {
               padding: 10,
             }}
           >
-            <Text>Informacoes do animal</Text>
-            <View style={{ flexDirection: "row" }}>
+            <Text style={{ fontSize: 20, margin: 10 }}>
+              Informacoes do animal
+            </Text>
+            <View style={{ flexDirection: "row", marginLeft: 10,}}>
               <View style={{ width: "50%" }}>
                 <Text>{animal.nome}</Text>
                 <Text>{animal.peso}</Text>
@@ -90,9 +92,12 @@ const AnimalDetail = ({ route }) => {
               padding: 10,
             }}
           >
-            <Text>Consultas</Text>
+            <Text style={{ fontSize: 20, margin: 10 }}>
+              Consultas
+            </Text>
             {consultations.map((consultation) => (
               <TouchableOpacity
+                style={{ margin: 10,}}
                 key={consultation.id}
                 onPress={() => navigation.navigate("ConsultationDetail")}
               >
