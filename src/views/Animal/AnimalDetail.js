@@ -1,22 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import { useEffect, useState, useCallback } from "react";
 import { Card, Text, FAB } from "react-native-paper";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import animalService from "../../services/animals";
+import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
 import ConsultationService from "../../services/consultations";
-const AnimalDetail = ({ route }) => {
-  const animalId = route.params.animal;
 
-  const [animal, setAnimal] = useState({});
-  const fecthAnimal = async () => {
-    const data = await animalService.getAnimalById(animalId);
-    setAnimal(data);
-  };
-
-  useEffect(() => {
-    fecthAnimal();
-  }, [animalId]);
-
+export default function AnimalDetail({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const [consultations, setConsultations] = useState([]);
 
@@ -34,98 +21,129 @@ const AnimalDetail = ({ route }) => {
   useEffect(() => {
     fetchConsultations();
   }, []);
-
   return (
     <View style={styles.container}>
-      {animal.id && (
-        <>
-          <View
-            style={{
-              width: 400,
-              height: 200,
-              backgroundColor: "#667338",
-              borderBottomLeftRadius: 200,
-              borderBottomRightRadius: 200,
-              alignItems: "center",
-              alignContent: "center",
-              marginBottom: 10,
-            }}
-          >
-            <Image
-              style={{ height: "75%", width: "50%" }}
-              source={{ uri: animal.capa.url }}
-            />
+      <View style={styles.CardDetails}>
+        <View style={{ flexDirection: "row", marginBottom: 10 }}>
+          <View style={{ width: "90%" }}>
+            <Text>Cachorrito</Text>
+            <Text>Sexo-Raca-Cao-Peso</Text>
           </View>
-          <View
-            style={{
-              height: "15%",
-              width: "90%",
-              margin: 5,
-              backgroundColor: "#A1B575",
-              borderRadius: 10,
-              padding: 10,
-            }}
-          >
-            <Text style={{ fontSize: 20, margin: 10 }}>
-              Informacoes do animal
-            </Text>
-            <View style={{ flexDirection: "row", marginLeft: 10,}}>
-              <View style={{ width: "50%" }}>
-                <Text>{animal.nome}</Text>
-                <Text>{animal.peso}</Text>
-                <Text>{animal.sexo}</Text>
-              </View>
-              <View style={{ width: "50%" }}>
-                <Text>{animal.status}</Text>
-                <Text>{animal.tipo_sanguineo}</Text>
-                <Text>{animal.idade}</Text>
-              </View>
-            </View>
+          <View style={{}}>
+            <TouchableOpacity>
+              <Text>Perfil</Text>
+            </TouchableOpacity>
           </View>
-          <View
-            style={{
-              height: "auto",
-              width: "90%",
-              margin: 5,
-              backgroundColor: "#A1B575",
-              borderRadius: 10,
-              padding: 10,
-            }}
-          >
-            <Text style={{ fontSize: 20, margin: 10 }}>
-              Consultas
-            </Text>
-            {consultations.map((consultation) => (
-              <TouchableOpacity
-                style={{ margin: 10,}}
-                key={consultation.id}
-                onPress={() => navigation.navigate("ConsultationDetail")}
-              >
-                <Card>
-                  <Card.Content>
-                    <View>
-                      <Text>{consultation.descricao}</Text>
-                      <Text>{consultation.data}</Text>
-                      <Text>{consultation.hora}</Text>
-                    </View>
-                  </Card.Content>
-                </Card>
-              </TouchableOpacity>
-            ))}
+        </View>
+        <ScrollView
+          horizontal={true}
+          style={{ flexDirection: "row", padding: 10 }}
+        >
+          <View style={styles.Component}></View>
+          <View style={styles.Component}></View>
+          <View style={styles.Component}></View>
+        </ScrollView>
+      </View>
+      <View
+        style={{
+          width: "95%",
+          margin: 10,
+          backgroundColor: "#FFFFFF",
+          padding: 10,
+          borderRadius: 10,
+        }}
+      >
+        <View style={styles.CardConsultas}>
+          <View>
+            <Text style={styles.TextTitle}>Consultas</Text>
           </View>
-        </>
-      )}
-      <StatusBar style="auto" />
+          {consultations.map((consultation) => (
+            <TouchableOpacity
+              key={consultation.id}
+              onPress={() =>
+                navigation.navigate("ConsultationDetail", {
+                  consultation: consultation.id,
+                })
+              }
+            >
+              <Card style={styles.CardAnimal}>
+                <Card.Content>
+                  <View style={styles.CardAnimalContent}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        width: "75%",
+                        color: "white",
+                      }}
+                    >
+                      {consultation.descricao}
+                    </Text>
+                    <Text style={{ ontWeight: "bold", color: "white" }}>
+                      {consultation.data}
+                    </Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
+    justifyContent: "center",
+    margin: 10,
+    backgroundColor: "#F2F2F2",
+    height: "auto",
+  },
+  CardDetails: {
+    flex: 1,
+    backgroundColor: "#A1B575",
+    padding: 10,
+    borderRadius: 15,
+    margin: 10,
+    width: "95%",
+    height: "auto",
+  },
+  CardConsultas: {
+    flex: 1,
+    backgroundColor: "#A1B575",
+    width: "100%",
+    borderRadius: 15,
+  },
+  CardAnimal: {
+    width: "auto",
+    backgroundColor: "#81A649",
+    margin: 10,
+    borderRadius: 10,
+    padding: 10,
+    flexDirection: "row",
+  },
+  CardAnimalContent: {
+    width: "auto",
+    flexDirection: "row",
+  },
+  TextSubititle: {
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  TextDetail: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  TextTitle: {
+    fontSize: 20,
+    margin: 10,
+  },
+  Component: {
+    height: 150,
+    width: 150,
+    backgroundColor: "#81A649",
+    borderRadius: 15,
+    margin: 10,
   },
 });
-
-export default AnimalDetail;

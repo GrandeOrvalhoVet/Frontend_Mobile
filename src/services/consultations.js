@@ -17,6 +17,11 @@ class ConsultationService {
     return response.data;
   }
   /*Deleta consultas criadas pelo cliente*/
+  async getConsultationById(ConsultationId) {
+    const response = await api.get(`/consultas/${ConsultationId}/`);
+    /*porque agudo? */
+    return response.data;
+  }
 }
 
 export default new ConsultationService();

@@ -30,49 +30,30 @@ export default function AnimalsList({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={{ margin: 20, height: "auto", width: "auto" }}>
-        <Text
-          style={{
-            textTransform: "none",
-            fontSize: 35,
-            fontFamily: "Times New Roman",
-          }}
-        >
-          Seus pets
-        </Text>
-      </View>
       <ScrollView
+        horizontal={true}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
         {animals.map((animal) => (
-          <Card key={animal.id} style={styles.CardAnimal}>
-            <Card.Content>
+          <Card key={animal.id} style={styles.CardStyle}>
+            <Card.Content
+              style={{ alignContent: "center", alignItems: "center" }}
+            >
               <TouchableOpacity
-                style={styles.CardPart}
                 onPress={() =>
-                  navigation.navigate("AnimalDetail", { animal: animal.id })
+                  navigation.navigate("AnimalPerfil", { animal: animal.id })
                 }
               >
                 <Card.Cover
                   style={{ height: 100, width: 100 }}
                   source={{ uri: animal.capa.url }}
                 />
-                <View style={styles.CardDados}>
-                  <View style={styles.CardDetalhes}>
-                    <Text style={styles.TextDados}>Nome: {animal.nome}</Text>
-                    <Text style={styles.TextDados}>Idade: {animal.idade}</Text>
-                    <Text style={styles.TextDados}>Peso: {animal.peso} kg</Text>
-                  </View>
-                  <View style={styles.CardSlash} />
-                  <View style={styles.CardDetalhes}>
-                    <Text style={styles.TextDados}>Sexo: {animal.sexo}</Text>
-                    <Text style={styles.TextDados}>?</Text>
-                    <Text style={styles.TextDados}>?</Text>
-                  </View>
-                </View>
               </TouchableOpacity>
+              <View style={{ margin: 10 }}>
+                <Text>{animal.nome}</Text>
+              </View>
             </Card.Content>
           </Card>
         ))}
@@ -84,39 +65,12 @@ export default function AnimalsList({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     textAlign: "center",
-    backgroundColor: "#F2F2F2",
   },
-  CardAnimal: {
-    width: "auto",
-    backgroundColor: "#667338",
+  CardStyle: {
     borderRadius: 15,
     margin: 10,
-  },
-  CardPart: {
-    width: "auto",
     height: "auto",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  CardDados: {
-    width: "80%",
-    padding: 10,
-    flexDirection: "row",
-  },
-  CardDetalhes: {
-    width: "50%",
-    textAlign: "center",
-    padding: 5,
-  },
-  CardSlash: {
-    width: 1,
-    height: "100%",
-    textAlign: "center",
-    backgroundColor: "black",
-  },
-  TextDados: {
-    fontFamily: "Times New Roman",
-    fontSize: 15,
-    margin: 5,
+    width: "20%",
+    backgroundColor: "#50732D",
   },
 });

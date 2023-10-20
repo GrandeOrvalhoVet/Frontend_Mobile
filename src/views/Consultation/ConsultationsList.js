@@ -36,41 +36,41 @@ export default function ConsultationsList({ navigation }) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {consultations.map((consultation) => (
-          <TouchableOpacity
-            key={consultation.id}
-            onPress={() => navigation.navigate("ConsultationDetail")}
-          >
-            <Card style={styles.CardAnimal}>
-              <Card.Content>
-                <View>
-                  <View>
-                    <View>
-                      <Text>{consultation.descricao}</Text>
-                      <Text>{consultation.data}</Text>
-                      <Text>{consultation.hora}</Text>
-                    </View>
-                  </View>
-                </View>
-              </Card.Content>
-            </Card>
-          </TouchableOpacity>
-        ))}
-        <View
-          style={{
-            height: 1,
-            width: "auto",
-            backgroundColor: "black",
-            margin: 10,
-          }}
-        />
-        <View>
+        <View style={styles.buttonNewSchedule}>
           <TouchableOpacity
             onPress={() => navigation.navigate("ConsultationAdd")}
-            style={styles.buttonNewSchedule}
-          >
-            <Text style={styles.buttonTextNewSchedule}>Novo Agendamento</Text>
-          </TouchableOpacity>
+            style={{ height: 40, width: 40, backgroundColor: "#81A649", margin: 10, borderRadius: 10, }}
+          ></TouchableOpacity>
+          <Text style={styles.buttonTextNewSchedule}>Novo Agendamento</Text>
+        </View>
+        <View style={styles.container}>
+          {consultations.map((consultation) => (
+            <TouchableOpacity
+              key={consultation.id}
+              onPress={() =>
+                navigation.navigate("ConsultationDetail", { consultation: consultation.id })
+              }
+            >
+              <Card style={styles.CardAnimal}>
+                <Card.Content>
+                  <View style={styles.CardAnimalContent}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        width: "75%",
+                        color: "white",
+                      }}
+                    >
+                      {consultation.descricao}
+                    </Text>
+                    <Text style={{ ontWeight: "bold", color: "white" }}>
+                      {consultation.data}
+                    </Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     </View>
@@ -78,16 +78,37 @@ export default function ConsultationsList({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#50732D",
+    width: "auto",
+    margin: 10,
+    borderRadius: 15,
+  },
   buttonNewSchedule: {
-    backgroundColor: "#667340",
+    backgroundColor: "#50732D",
     height: 50,
     width: "auto",
     padding: 10,
     borderRadius: 15,
     margin: 10,
-    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   buttonTextNewSchedule: {
-    textShadowColor: "white",
+    fontWeight: "bold",
+    color: "white",
+  },
+  CardAnimal: {
+    width: "auto",
+    backgroundColor: "#81A649",
+    margin: 10,
+    borderRadius: 10,
+    padding: 10,
+    flexDirection: "row",
+  },
+  CardAnimalContent: {
+    width: "auto",
+    flexDirection: "row",
   },
 });

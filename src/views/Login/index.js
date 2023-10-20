@@ -8,10 +8,8 @@ import {
   TouchableOpacity,
   Image,
   Animated,
-  CheckBox,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { CheckBox } from "@react-native-community/checkbox";
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState("");
@@ -43,7 +41,6 @@ export default function Login({ navigation }) {
     }
   };
   const changeUsername = (text) => {
-    console.log(text);
     setUsername(text);
   };
 
@@ -84,6 +81,8 @@ export default function Login({ navigation }) {
   const toggleRememberMeIsChecked = () => {
     setRememberMeIsChecked(!rememberMeIsChecked);
   };
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   return (
     <View style={styles.body}>
       <View style={styles.form}>
@@ -146,10 +145,10 @@ export default function Login({ navigation }) {
           <View style={styles.rememberMe}>
             <Text style={styles.rememberMeText}>Remember me?</Text>
             <CheckBox
-              style={styles.rememberMeCheckbox}
+              display={false}
               value={rememberMeIsChecked}
               onValueChange={toggleRememberMeIsChecked}
-            ></CheckBox>
+            />
           </View>
           <Text>Forget Password</Text>
         </View>
@@ -157,7 +156,7 @@ export default function Login({ navigation }) {
 
       <View style={styles.buttonView}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Animal")}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>

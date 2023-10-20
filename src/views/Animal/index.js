@@ -1,20 +1,22 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AnimalList from "./AnimalList";
-import AnimalDetail from "./AnimalDetail";
+import AnimalPerfil from "./AnimalPerfil";
+import AnimalHome from "./AnimalHome";
 
 const Stack = createNativeStackNavigator();
 
-export default function Animal() {
+export default function Animal({navigation}) {
   return (
-    <Stack.Navigator initialRouteName="AnimalList">
+    <Stack.Navigator initialRouteName="Pets">
       <Stack.Screen
-        name="AnimalList"
-        component={AnimalList}
+        name="Pets"
+        component={AnimalHome}
         options={{ headerShown: false }}
+        navigation={navigation}
+
       />
       <Stack.Screen
-        name="AnimalDetail"
-        component={AnimalDetail}
+        name="AnimalPerfil"
+        component={AnimalPerfil}
         options={{ headerShown: true }}
       />
     </Stack.Navigator>

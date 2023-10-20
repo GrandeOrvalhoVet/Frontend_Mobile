@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { Dropdown } from "react-native-element-dropdown";
 import { useTheme } from "react-native-paper";
@@ -8,7 +14,6 @@ import animalService from "../../services/animals";
 import consultationService from "../../services/consultations";
 
 export default function ConsultationAdd({ navigation }) {
-  const theme = useTheme();
 
   const [isFocus, setIsFocus] = useState(false);
 
@@ -37,10 +42,17 @@ export default function ConsultationAdd({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={{ marginHorizontal: 10 }}>
+      <View
+        style={{
+          backgroundColor: "#50732D",
+          padding: 10,
+          margin: 10,
+          borderRadius: 10,
+        }}
+      >
         <TextInput
           label="descricao"
-          style={{ marginBottom: 10 }}
+          style={styles.TextInput}
           onChangeText={(text) =>
             setConsultations((consultation) => ({
               ...consultation,
@@ -51,8 +63,8 @@ export default function ConsultationAdd({ navigation }) {
         />
         <TextInput
           label="Dia"
-          style={{ marginBottom: 10 }}
           type="date"
+          style={styles.TextInput}
           onChangeText={(text) =>
             setConsultations((consultation) => ({
               ...consultation,
@@ -63,7 +75,7 @@ export default function ConsultationAdd({ navigation }) {
         />
         <TextInput
           label="Horario"
-          style={{ marginBottom: 10 }}
+          style={styles.TextInput}
           onChangeText={(text) =>
             setConsultations((consultation) => ({
               ...consultation,
@@ -76,22 +88,25 @@ export default function ConsultationAdd({ navigation }) {
           style={[
             styles.dropdown,
             {
-              backgroundColor: theme.colors.surfaceVariant,
+              backgroundColor: "#81A649",
+              borderRadius: 10,
+              margin: 10,
+              height: 50,
+              width: "auto",
             },
             isFocus && {
-              borderBottomColor: theme.colors.primary,
-              borderBottomWidth: 1.5,
+              borderBottomColor: "#81A649",
             },
           ]}
           containerStyle={[
             {
-              backgroundColor: theme.colors.surfaceVariant,
+              backgroundColor: "#81A649",
             },
           ]}
           placeholderStyle={styles.placeholderStyle}
           itemContainerStyle={[
             {
-              backgroundColor: theme.colors.surfaceVariant,
+              backgroundColor: "#81A649",
             },
           ]}
           selectedTextStyle={styles.selectedTextStyle}
@@ -111,11 +126,11 @@ export default function ConsultationAdd({ navigation }) {
             setIsFocus(false);
           }}
         />
-      </View>
-      <View style={styles.buttons}>
-        <Button mode="contained" onPress={save}>
-          Adicionar
-        </Button>
+        <View>
+          <TouchableOpacity onPress={save} style={styles.buttons}>
+            <Text style={styles.textImput}>Salvar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -125,12 +140,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  image: {
-    width: 200,
-    height: 200,
-    alignSelf: "center",
-    marginBottom: 20,
   },
   dropdown: {
     height: 55,
@@ -151,9 +160,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttons: {
-    flexDirection: "row",
+    borderRadius: 10,
+    backgroundColor: "#81A649",
     justifyContent: "space-around",
     marginTop: 20,
+    marginHorizontal: 50,
     marginBottom: 20,
+    padding: 10,
+    alignItems: "center",
+  },
+  TextInput: {
+    color: "#000a",
+    backgroundColor: "#81A649",
+    margin: 10,
   },
 });
