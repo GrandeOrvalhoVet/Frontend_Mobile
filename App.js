@@ -32,6 +32,11 @@ function MainDrawer({ navigation }) {
       }}
     >
       <Drawer.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
         name="Animal"
         component={Animal}
         options={{

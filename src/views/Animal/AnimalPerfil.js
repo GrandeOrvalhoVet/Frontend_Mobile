@@ -44,21 +44,21 @@ const AnimalPerfil = ({ route }) => {
             <Image style={styles.Image} source={{ uri: animal.capa.url }} />
           </View>
           <View style={styles.CardDetails}>
-            <Text style={styles.TextTitle}>Informacoes do animal</Text>
+            <Text style={styles.TextTitle}>Informações do animal</Text>
             <View style={{ marginLeft: 10 }}>
               <View style={{ width: "50%" }}>
                 <Text style={styles.TextSubititle}>Nome</Text>
                 <Text style={styles.TextDetail}>{animal.nome}</Text>
+                <Text style={styles.TextSubititle}>Idade</Text>
+                <Text style={styles.TextDetail}>{animal.idade} anos</Text>
                 <Text style={styles.TextSubititle}>Peso</Text>
-                <Text style={styles.TextDetail}>{animal.peso}</Text>
+                <Text style={styles.TextDetail}>{animal.peso} kg</Text>
                 <Text style={styles.TextSubititle}>Sexo</Text>
                 <Text style={styles.TextDetail}>{animal.sexo}</Text>
                 <Text style={styles.TextSubititle}>Status</Text>
                 <Text style={styles.TextDetail}>{animal.status}</Text>
-                <Text style={styles.TextSubititle}>Tipo sanguineo</Text>
+                <Text style={styles.TextSubititle}>tipo Sanguíneo</Text>
                 <Text style={styles.TextDetail}>{animal.tipo_sanguineo}</Text>
-                <Text style={styles.TextSubititle}>idade</Text>
-                <Text style={styles.TextDetail}>{animal.idade}</Text>
               </View>
             </View>
           </View>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   TextTitle: {
     fontSize: 20,
     margin: 10,
-  }
+  },
 });
 
 export default AnimalPerfil;

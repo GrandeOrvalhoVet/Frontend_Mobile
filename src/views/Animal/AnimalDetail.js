@@ -27,7 +27,7 @@ export default function AnimalDetail({ navigation }) {
         <View style={{ flexDirection: "row", marginBottom: 10 }}>
           <View style={{ width: "90%" }}>
             <Text>Cachorrito</Text>
-            <Text>Sexo-Raca-Cao-Peso</Text>
+            <Text>Sexo-Raça-Cão-Peso</Text>
           </View>
           <View style={{}}>
             <TouchableOpacity>
@@ -61,7 +61,7 @@ export default function AnimalDetail({ navigation }) {
             <TouchableOpacity
               key={consultation.id}
               onPress={() =>
-                navigation.navigate("ConsultationDetail", {
+                navigation.navigate("Consultas/ConsultationDetail", {
                   consultation: consultation.id,
                 })
               }

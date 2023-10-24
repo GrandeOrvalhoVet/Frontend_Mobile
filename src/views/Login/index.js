@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   Image,
   Animated,
+  CheckBox,
 } from "react-native";
-import { CheckBox } from "@react-native-community/checkbox";
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState("");
@@ -111,8 +111,8 @@ export default function Login({ navigation }) {
               style={styles.inputName}
               onFocus={toggleUsernameIsFocused}
               onBlur={toggleUsernameIsFocused}
-              onChangeText={changeUsername}
               value={username}
+              onChangeText={setUsername}
             ></TextInput>
           </View>
 

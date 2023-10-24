@@ -39,7 +39,12 @@ export default function AnimalsList({ navigation }) {
         {animals.map((animal) => (
           <Card key={animal.id} style={styles.CardStyle}>
             <Card.Content
-              style={{ alignContent: "center", alignItems: "center" }}
+              style={{
+                alignContent: "center",
+                alignItems: "center",
+                width: "auto",
+                padding: 10,
+              }}
             >
               <TouchableOpacity
                 onPress={() =>
@@ -47,11 +52,11 @@ export default function AnimalsList({ navigation }) {
                 }
               >
                 <Card.Cover
-                  style={{ height: 100, width: 100 }}
+                  style={{ height: 100, width: 100, borderRadius: 1000 }}
                   source={{ uri: animal.capa.url }}
                 />
               </TouchableOpacity>
-              <View style={{ margin: 10 }}>
+              <View>
                 <Text>{animal.nome}</Text>
               </View>
             </Card.Content>
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
   },
   CardStyle: {
     borderRadius: 15,
+    padding: 20,
     margin: 10,
     height: "auto",
     width: "20%",
