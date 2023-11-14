@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://191.52.59.229:19003/api/",
+  baseURL: "https://grandeorvalho-dev-scbe.3.us-1.fl0.io/api/",
 });
 
 export default api;
